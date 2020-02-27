@@ -27,7 +27,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let query = PFQuery(className: "posts")
+        let query = PFQuery(className: "Post")
         query.includeKey("author")
         query.limit = 20
         query.findObjectsInBackground { (posts, error) in
@@ -40,8 +40,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
-        
-    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,8 +53,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let imageFile = post["image"] as! PFFileObject
         let urlString = imageFile.url!
         let url = URL(string: urlString)!
+     
         cell.photoView.af_setImage(withURL: url)
-        
         return cell
     }
     /*
